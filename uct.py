@@ -10,10 +10,7 @@ from game import Game
 from dataclasses import dataclass
 from math import sqrt, log
 import sys
-
-class Side(IntEnum):
-    MAX = 1
-    MIN = -1
+from util import Side
 
 # Structure to store a node of the UCT search tree
 @dataclass
@@ -132,7 +129,7 @@ class UCTPlayer():
         """
 
         self.node_count += 1
-        new_state = self.game.get_new_node(node.state, move, 0 if node.side == Side.MAX else 1)
+        new_state = self.game.get_new_node(node.state, move)
         self.latest_expansion = new_state
         result = self.game.get_eval(new_state)
 
