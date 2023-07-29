@@ -1,4 +1,4 @@
-base) ➜  mancala git:(master) ✗ python3 live.py 1
+(base) ➜  mancala git:(master) ✗ python3 live.py 1
   [0] |  9-8 |  7-6 |  5-4 |  3-2 |  1-0 |      |
       |    5 |    5 |    5 |    5 |    5 |    5 |
     5 |    5 |    5 |    5 |    5 |    5 |      |

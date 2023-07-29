@@ -130,7 +130,7 @@ class Game:
         }
         self.branching_factor = ROW_LEN*2-2
         self.first_person = first_view
-        assert first_view in [0, 1]
+        assert first_view in [-1, 1]
     
     def get_new_node(self, node: int, move):
         """
@@ -158,33 +158,34 @@ class Game:
         )
     
     def print_board(self, node):
-        # FIXME: adapt to 2 perspectives
         state = self._get_state(node)
         # print(f"SILVER {state.score[0]} - MUGGLE {state.score[1]}",)
         
-        print(f'[{state.score[-self.first_person]}] |'.rjust(7), end='')
+        print(f'[{state.score[-self.first_person]}]  '.rjust(7), end='')
         for i in range(ROW_LEN-2, -1, -1):
-            print(f'{i*2+1}-{i*2} |'.rjust(7), end='')
-        print('|'.rjust(7))
-        
-        # print('='*(7*7))
+            print(f'{i*2+1}-{i*2}  '.rjust(7), end='')
+        print(''.rjust(7))
         
         print('|'.rjust(7), end='')
-        for i in range(ROW_LEN-1, -1, -1):
-            print(f'{state.cell[ROW_LEN + i]} |'.rjust(7), end='')
+        for i in range(ROW_LEN-2, -1, -1):
+            pos, _ = state._get_pos_drt(i*2, -self.first_person)
+            print(f'{state.cell[pos]} |'.rjust(7), end='')
+        print(f'{state.cell[ROW_LEN if self.first_person > 0 else 0]} |'.rjust(7), end='')
         print()
         
-        for i in range(ROW_LEN):
-            print(f'{state.cell[i]} |'.rjust(7), end='')
-        print('|'.rjust(7), end='')
+        print(f'{state.cell[0 if self.first_person > 0 else ROW_LEN]} |'.rjust(7), end='')
+        for i in range(ROW_LEN-1):
+            pos, _ = state._get_pos_drt(i*2, self.first_person)
+            print(f'{state.cell[pos]} |'.rjust(7), end='')
+        print(''.rjust(7), end='')
         print()
         # print('='*(7*7))
         
         
-        print(f'[{state.score[self.first_person]}] |'.rjust(7), end='')
+        print(f'[{state.score[self.first_person]}]  '.rjust(7), end='')
         for i in range(0, ROW_LEN-1):
-            print(f'{i*2}-{i*2+1} |'.rjust(7), end='')
-        print('|'.rjust(7), end='')
+            print(f'{i*2}-{i*2+1}  '.rjust(7), end='')
+        print(''.rjust(7), end='')
         
         print('\n')
     

@@ -7,7 +7,7 @@ from game import Game
 from uct import UCTPlayer
 from util import Side
 
-N_ITER = 10000
+N_ITER = 100000
 
 
 first_pers = int(sys.argv[1])
